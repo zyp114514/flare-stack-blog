@@ -17,17 +17,23 @@ export const PostItem = memo(({ post }: PostItemProps) => {
       >
         <div className="flex flex-col gap-3">
           {/* Metadata Row */}
-          <div className="flex items-center gap-3 text-xs font-mono text-muted-foreground/60 tracking-wider">
-            <time dateTime={post.publishedAt?.toISOString()}>
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-xs font-mono text-muted-foreground/60 tracking-wider">
+            <time
+              dateTime={post.publishedAt?.toISOString()}
+              className="whitespace-nowrap"
+            >
               {formatDate(post.publishedAt)}
             </time>
             {post.tags && post.tags.length > 0 && (
               <>
                 <span className="opacity-30">/</span>
-                <div className="flex gap-2">
+                <div className="flex flex-wrap gap-2">
                   {post.tags.map((tag) => (
-                    <span key={tag.id} className="text-muted-foreground/60">
-                      {tag.name}
+                    <span
+                      key={tag.id}
+                      className="text-muted-foreground/60 whitespace-nowrap"
+                    >
+                      #{tag.name}
                     </span>
                   ))}
                 </div>
