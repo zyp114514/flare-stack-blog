@@ -7,6 +7,7 @@ export const emailMessageSchema = z.object({
     subject: z.string(),
     html: z.string(),
     headers: z.record(z.string(), z.string()).optional(),
+    idempotencyKey: z.string().optional(),
   }),
 });
 

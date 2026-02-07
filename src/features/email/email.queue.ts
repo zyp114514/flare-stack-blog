@@ -3,8 +3,8 @@ import { sendEmail } from "@/features/email/email.service";
 import { getDb } from "@/lib/db";
 
 export async function handleEmailMessage(
-  data: EmailMessage["data"],
   env: Env,
+  data: EmailMessage["data"],
 ): Promise<void> {
   const db = getDb(env);
   const result = await sendEmail({ db, env }, data);

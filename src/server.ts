@@ -22,7 +22,7 @@ export default {
   fetch(request, env, ctx) {
     return app.fetch(request, env, ctx);
   },
-  async queue(batch: MessageBatch<unknown>, env: Env) {
+  async queue(batch, env) {
     for (const message of batch.messages) {
       const parsed = queueMessageSchema.safeParse(message.body);
       if (!parsed.success) {
@@ -40,7 +40,10 @@ export default {
         switch (event.type) {
           // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
           case "EMAIL":
-            await handleEmailMessage(event.data, env);
+            await handleEmailMessage(env, {
+              ...event.data,
+              idempotencyKey: message.id,
+            });
             break;
           default:
             event.type satisfies never;
