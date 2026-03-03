@@ -88,7 +88,10 @@ export function useMediaLibrary() {
     mutationFn: async (keys: Array<string>) => {
       // 逐个删除
       for (const key of keys) {
-        await deleteImageFn({ data: { key } });
+        const result = await deleteImageFn({ data: { key } });
+        if (result.error) {
+          throw new Error("资源正在被文章使用，无法删除");
+        }
       }
       return keys; // 返回 keys 以便在 onSuccess 中使用
     },

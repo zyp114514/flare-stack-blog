@@ -80,5 +80,5 @@ export const toggleReplyNotificationFn = createServerFn({
         "reply_notification",
       );
     }
-    return { success: true };
+    return ok({ success: true });
   });

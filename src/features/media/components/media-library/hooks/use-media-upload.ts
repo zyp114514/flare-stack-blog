@@ -29,7 +29,10 @@ export function useMediaUpload() {
       const formData = new FormData();
       formData.append("image", file);
       const result = await uploadImageFn({ data: formData });
-      return result;
+      if (result.error) {
+        throw new Error("媒体入库失败，请重试");
+      }
+      return result.data;
     },
   });
 

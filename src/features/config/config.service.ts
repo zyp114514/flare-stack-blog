@@ -1,6 +1,7 @@
 import type { SystemConfig } from "@/features/config/config.schema";
 import * as CacheService from "@/features/cache/cache.service";
 import * as ConfigRepo from "@/features/config/config.data";
+import { ok } from "@/lib/error";
 import {
   CONFIG_CACHE_KEYS,
   SystemConfigSchema,
@@ -28,5 +29,5 @@ export async function updateSystemConfig(
     CONFIG_CACHE_KEYS.isEmailConfigured,
   );
 
-  return { success: true };
+  return ok({ success: true });
 }
